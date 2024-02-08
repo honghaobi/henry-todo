@@ -10,7 +10,7 @@ import { useGetTasksQuery } from "./services/taskService";
 const NEW_TASK = "Type up a new task";
 
 function App() {
-  const { data, error } = useGetTasksQuery();
+  const { data } = useGetTasksQuery();
   const [tasks, setTasks] = useState<TaskType[]>(data);
   const [newTask, setNewTask] = useState<string>("");
 
