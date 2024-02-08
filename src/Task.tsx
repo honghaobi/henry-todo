@@ -11,7 +11,7 @@ export type TaskType = {
   completed: boolean;
 };
 
-function Task({
+const Task = ({
   id,
   title,
   completed,
@@ -22,10 +22,9 @@ function Task({
   removeTask: (id: number) => void;
   updateTask: (id: number, value: string) => void;
   toggleCompleteTask: (id: number) => void;
-}) {
+}) => {
   const [isEdit, setIsEdit] = useState(false);
   const [editValue, setEditValue] = useState(title);
-
   const handleUpdate = () => {
     if (editValue) {
       updateTask(id, editValue);
@@ -85,6 +84,5 @@ function Task({
       </Button>
     </li>
   );
-}
-
+};
 export default Task;
