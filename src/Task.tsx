@@ -25,12 +25,16 @@ const Task = ({
 }) => {
   const [isEdit, setIsEdit] = useState(false);
   const [editValue, setEditValue] = useState(title);
+
   const handleUpdate = () => {
-    if (editValue) {
-      updateTask(id, editValue);
+    if (editValue.trim() !== "") {
+      updateTask(id, editValue.trim());
       setIsEdit(false);
     }
   };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) =>
+    event.key === "Enter" && handleUpdate();
 
   return (
     <li className="flex items-center justify-between max-w-[500px]">
@@ -41,7 +45,7 @@ const Task = ({
             autoFocus
             value={editValue}
             onChange={(e) => setEditValue(e.target.value)}
-            onKeyDown={(event) => event.key === "Enter" && handleUpdate()}
+            onKeyDown={handleKeyDown}
           />
         ) : (
           <div
@@ -85,4 +89,5 @@ const Task = ({
     </li>
   );
 };
+
 export default Task;

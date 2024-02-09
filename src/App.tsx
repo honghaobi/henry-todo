@@ -14,13 +14,13 @@ function App() {
   const [tasks, setTasks] = useState<TaskType[]>(data);
   const [newTask, setNewTask] = useState<string>("");
 
-  const sortedTasks = tasks.sort((a, b) =>
-    a.completed === b.completed ? 0 : a.completed ? -1 : 1,
-  );
+  const sortedTasks = tasks
+    .slice()
+    .sort((a, b) => (a.completed === b.completed ? 0 : a.completed ? -1 : 1));
 
   const handleAddNewTask = (newTask: string) => {
     if (newTask) {
-      setTasks([
+      const newTasks = [
         ...tasks,
         {
           id: 100 + tasks.length,
@@ -28,29 +28,29 @@ function App() {
           completed: false,
           userId: 3,
         },
-      ]);
+      ];
+      setTasks(newTasks);
       setNewTask("");
     }
   };
 
   const handleUpdateTask = (taskId: number, value: string) => {
-    setTasks(
-      tasks.map((task) =>
-        task.id === taskId ? { ...task, title: value } : task,
-      ),
+    const updatedTasks = tasks.map((task) =>
+      task.id === taskId ? { ...task, title: value } : task,
     );
+    setTasks(updatedTasks);
   };
 
   const handleRemoveTask = (taskId: number) => {
-    setTasks(tasks.filter((task) => task.id !== taskId));
+    const updatedTasks = tasks.filter((task) => task.id !== taskId);
+    setTasks(updatedTasks);
   };
 
   const handleToggleCompleteTask = (taskId: number) => {
-    setTasks(
-      tasks.map((task) =>
-        task.id === taskId ? { ...task, completed: !task.completed } : task,
-      ),
+    const updatedTasks = tasks.map((task) =>
+      task.id === taskId ? { ...task, completed: !task.completed } : task,
     );
+    setTasks(updatedTasks);
   };
 
   return (
