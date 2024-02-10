@@ -1,7 +1,7 @@
-import App from "./App";
+import App from "../App";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-describe("App Component", () => {
+describe("App E2E Test", () => {
   beforeEach(() => {
     const queryClient = new QueryClient();
     cy.mount(

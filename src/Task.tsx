@@ -49,7 +49,7 @@ const Task = ({
           />
         ) : (
           <div
-            className="w-[330px] cursor-pointer"
+            className={`w-[330px] cursor-pointer ${completed ? "line-through" : ""}`}
             onClick={() => toggleCompleteTask(id)}
           >
             {completed ? (

@@ -1,4 +1,4 @@
-import Task from "./Task";
+import Task from "../Task";
 
 describe("Task", () => {
   it("should mount with title", () => {

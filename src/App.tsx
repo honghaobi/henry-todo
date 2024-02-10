@@ -60,21 +60,19 @@ function App() {
           <CardTitle>Henry's Tasks</CardTitle>
         </CardHeader>
         <CardContent>
-          <div>
-            <ul className="flex flex-col gap-2">
-              {sortedTasks.map((task) => (
-                <Task
-                  key={task.id}
-                  id={task.id}
-                  title={task.title}
-                  completed={task.completed}
-                  removeTask={handleRemoveTask}
-                  updateTask={handleUpdateTask}
-                  toggleCompleteTask={handleToggleCompleteTask}
-                />
-              ))}
-            </ul>
-          </div>
+          <ul className="flex flex-col gap-2 max-h-[70vh] overflow-scroll">
+            {sortedTasks.map((task) => (
+              <Task
+                key={task.id}
+                id={task.id}
+                title={task.title}
+                completed={task.completed}
+                removeTask={handleRemoveTask}
+                updateTask={handleUpdateTask}
+                toggleCompleteTask={handleToggleCompleteTask}
+              />
+            ))}
+          </ul>
           <form
             className="flex mt-5"
             onSubmit={(e) => {
