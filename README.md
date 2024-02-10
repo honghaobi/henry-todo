@@ -38,4 +38,4 @@ The application utilizes Shadcn UI for consistent UI components and Tailwind CSS
 
 ## Deployed site link
 
-henry-todo.surge.sh
+[henry-todo.surge.sh](henry-todo.surge.sh)
