@@ -6,7 +6,7 @@ This is a Single Page Application (SPA) built using React, TypeScript, and Cypre
 
 To run this application locally, follow these steps:
 
-1. **git clone <repository-url>**
+1. **git clone https://github.com/honghaobi/henry-todo.git**
 1. **cd henry-todo**
 1. **yarn install**
 1. **yarn dev**
