@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { Input } from "@/components/ui/input";
@@ -12,31 +12,32 @@ const NEW_TASK = "Type up a new task";
 function App() {
   const { data } = useGetTasksQuery();
   const [tasks, setTasks] = useState<TaskType[]>(data);
-  const [newTask, setNewTask] = useState<string>("");
+  const newTaskRef = useRef<HTMLInputElement>(null);
 
   const sortedTasks = tasks
     .slice()
     .sort((a, b) => (a.completed === b.completed ? 0 : a.completed ? -1 : 1));
 
-  const handleAddNewTask = (newTask: string) => {
-    if (newTask) {
+  const handleAddNewTask = () => {
+    const newTaskValue = newTaskRef.current?.value;
+    if (newTaskValue) {
       const newTasks = [
         ...tasks,
         {
           id: 100 + tasks.length,
-          title: newTask,
+          title: newTaskValue,
           completed: false,
           userId: 3,
         },
       ];
       setTasks(newTasks);
-      setNewTask("");
+      newTaskRef.current!.value = "";
     }
   };
 
   const handleUpdateTask = (taskId: number, value: string) => {
     const updatedTasks = tasks.map((task) =>
-      task.id === taskId ? { ...task, title: value } : task,
+      task.id === taskId ? { ...task, title: value } : task
     );
     setTasks(updatedTasks);
   };
@@ -48,7 +49,7 @@ function App() {
 
   const handleToggleCompleteTask = (taskId: number) => {
     const updatedTasks = tasks.map((task) =>
-      task.id === taskId ? { ...task, completed: !task.completed } : task,
+      task.id === taskId ? { ...task, completed: !task.completed } : task
     );
     setTasks(updatedTasks);
   };
@@ -77,14 +78,13 @@ function App() {
             className="flex mt-5"
             onSubmit={(e) => {
               e.preventDefault();
-              handleAddNewTask(newTask);
+              handleAddNewTask();
             }}
           >
             <Input
               type="text"
               placeholder={NEW_TASK}
-              value={newTask}
-              onChange={(e) => setNewTask(e.target.value)}
+              ref={newTaskRef}
             />
             <Button variant="outline" type="submit" aria-label="Add Task">
               <FontAwesomeIcon icon={faPlus} />
